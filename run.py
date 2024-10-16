@@ -58,7 +58,7 @@ class Grid:
         """
         valid_placement = False
         while not valid_placement:
-            orientation = random.choice(['H', 'V'])
+            orientation = random.choice(['H', 'V']) #Horizontal or Vertical
             if orientation == 'H':
                 row = random.randint(0, self.size - 1)
                 col = random.randint(0, self.size - ship.size)

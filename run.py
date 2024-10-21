@@ -87,3 +87,9 @@ class Grid:
         elif self.grid[row][col] == '~':
             self.grid[row][col] = 'O'
         return False
+
+    def all_ships_sunk(self):
+        """
+        Checks if all ships have been sunk.
+        """
+        return all(ship.is_sunk() for ship in self.ships)

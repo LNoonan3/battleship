@@ -76,3 +76,14 @@ class Grid:
                         ship.coordinates.append((row + i, col))
                     valid_placement = True
         self.ships.append(ship)
+
+    def receive_attack(self, row, col):
+        """
+        Processes an attack and return whether it was a hit or miss.
+        """
+        if self.grid[row][col] == 'S':
+            self.grid[row][col] = 'X'
+            return True
+        elif self.grid[row][col] == '~':
+            self.grid[row][col] = 'O'
+        return False

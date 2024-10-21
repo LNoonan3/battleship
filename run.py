@@ -152,3 +152,17 @@ class Computer(Player):
             self.smart_fire(opponent_grid)
         else:
             self.advanced_fire(opponent_grid)
+
+    def random_fire(self, opponent_grid):
+        """
+        Computer fires randomly at the grid (Easy AI).
+        """
+        valid_target = False
+        while not valid_target:
+            row = random.randint(0, opponent_grid.size - 1)
+            col = random.randint(0, opponent_grid.size - 1)
+            if opponent_grid.grid[row][col] not in ['X', 'O']:
+                valid_target = True
+        hit = opponent_grid.receive_attack(row, col)
+        print(f"Computer fires at {chr(65 + col)}{row + 1}.",
+                "Hit!" if hit else "Miss!")

@@ -93,3 +93,37 @@ class Grid:
         Checks if all ships have been sunk.
         """
         return all(ship.is_sunk() for ship in self.ships)
+
+class Player:
+    """
+    A class representing a player in the game of Battleship.
+    """
+
+    def __init__(self, name, grid_size):
+        """
+        Initializes the player object with a name and a grid.
+        """
+        self.name = name
+        self.grid = Grid(grid_size)
+
+    def take_turn(self, opponent_grid):
+        """
+        Allows the player to take a turn and attack the opponent's grid.
+        """
+        valid_input = False
+        while not valid_input:
+            try:
+                target = input(
+                    f"{self.name}, enter your target (e.g., A5: )").upper()
+                col = ord(target[0]) - 65 #convert letter to column index
+                row = int(target[1:]) - 1 #convert number to row index
+                if row < 0 or col < 0 or row >= opponent_grid.size or col >= opponent_grid.size:
+                    print("Targetis out of bounds. Try again.")
+                elif opponent_grid.grid[row][col] in ['X', 'O']:
+                    print("You've already fired at this location. Try again.")
+                else:
+                    valid_input = True
+            except (IndexError, ValueError):
+                print("Invalid input. Enter a letter and a number (e.g., A5).")
+        hit = opponent_grid.receive_attack(row, col)
+        print("Hit!" if hit else "Miss!")

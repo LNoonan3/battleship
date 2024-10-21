@@ -130,3 +130,25 @@ class Player:
                 print("Invalid input. Enter a letter and a number (e.g., A5).")
         hit = opponent_grid.receive_attack(row, col)
         print("Hit!" if hit else "Miss!")
+
+class Computer(Player):
+    """
+    a class representing the computer player with enhanced AI.
+    """
+    def __init__(self, name, grid_size, dificulty='easy'):
+        super().__init__(name, grid_size)
+        self.difficulty = difficulty
+        self.las_hit = None
+        self.hunt_mode = False
+        self.potential_targets = []
+
+    def take_turn(self, opponent_grid):
+        """
+        Allows the computer to take a turn with enhanced AI based on difficulty.
+        """
+        if self.difficulty == 'easy':
+            self.random_fire(opponent_grid)
+        elif self.difficulty == 'medium':
+            self.smart_fire(opponent_grid)
+        else:
+            self.advanced_fire(opponent_grid)

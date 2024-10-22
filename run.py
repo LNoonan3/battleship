@@ -1,6 +1,5 @@
 import random
 
-
 class Ship:
     """
     A class representing a ship in the game of Battleship.
@@ -247,3 +246,29 @@ def setup_ships(grid):
     ]
     for ship in ships:
         grid.place_ship(ship)
+
+def choose_game_options():
+    """
+    Prompts the player to choose game options like grid size and difficulty.
+    """
+    while True:
+        try:
+            grid_size- int(input("Choose grid size (8, 10, 12): "))
+            if grid_size not in [8, 10, 12]:
+                raise ValueError(
+                    "Invalid grid size. Please choose 8, 10, or 12."
+                    )
+            break
+        except ValueError as e: 
+            print(e)
+
+    while True:
+        difficulty = input("Choose difficulty (easy, medium, hard): ").lower()
+        if difficulty in ['easy', 'medium', 'hard']:
+            break
+        else:
+            print(
+                "Invalid difficulty level. Please choose 'easy', 'medium', or 'hard'."
+            )
+
+    return grid_size, difficulty

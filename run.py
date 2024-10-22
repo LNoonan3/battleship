@@ -190,3 +190,34 @@ class Computer(Player):
             self.hunt_mode = True
         else:
             self.hunt_mode = False
+
+    def advanced_fire(self, opponent_grid):
+        """
+        Computer uses smarter tactics, avoiding previously missed spots (Hard AI).
+        """
+        if self.hunt_mode and self.potential_targets:
+            row, col = self.potential_targets.pop(0)
+        else:
+            if self.last_hit and not self.potential_targets:
+                self.potential_targets = self.get_adjacent_cells(
+                    self.last_hit, opponent_grid)
+
+            if not self.potential_targets:
+                valid_target = False
+                while not valid_target:
+                    row = random.randint(0, opponent_grid.size - 1)
+                    col = random.randint(0, opponent_grid.size - 1)
+
+                    if opponent_grid.grid[row][col] not in ['X', 'O']:
+                        valid_target = True
+            else:
+                row, col =self.potential_targets.pop(0)
+
+        hit = opponent_grid.receive_attack(row, col)
+        print(f"Computer fires at {chr(65 + col)}{row + 1}.",
+                "Hit!" if hit else "Miss!")
+        if hit:
+            self.last_hit = (row, col)
+            self.hunt_mode = True
+        else:
+            self.hunt_mode = False

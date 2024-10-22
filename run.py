@@ -121,7 +121,7 @@ class Player:
                 col = ord(target[0]) - 65 #convert letter to column index
                 row = int(target[1:]) - 1 #convert number to row index
                 if row < 0 or col < 0 or row >= opponent_grid.size or col >= opponent_grid.size:
-                    print("Targetis out of bounds. Try again.")
+                    print("Target is out of bounds. Try again.")
                 elif opponent_grid.grid[row][col] in ['X', 'O']:
                     print("You've already fired at this location. Try again.")
                 else:
@@ -138,7 +138,7 @@ class Computer(Player):
     def __init__(self, name, grid_size, dificulty='easy'):
         super().__init__(name, grid_size)
         self.difficulty = difficulty
-        self.las_hit = None
+        self.last_hit = None
         self.hunt_mode = False
         self.potential_targets = []
 
@@ -166,3 +166,27 @@ class Computer(Player):
         hit = opponent_grid.receive_attack(row, col)
         print(f"Computer fires at {chr(65 + col)}{row + 1}.",
                 "Hit!" if hit else "Miss!")
+
+    def smart_fire(self, opponent_grid):
+        """
+        Computer fires smarty by focusing on adjacent cells after a hit (Medium AI).
+        """
+        if self.last_hit and not self.potential_targets:
+            self.potential_targets = self.get_adjacent_cells(
+                self.last_hit, opponent_grid)
+
+        if self.potential_targets:
+            row, col = self.potential_targets.pop(0)
+        else:
+            row, col = random.randint(
+                0, opponent_grid.size - 1), random.randint(
+                    0, opponent_grid.size - 1)
+
+        hit = opponent_grid.receive_attack(row, col)
+        print(f"Computer fires at {chr(65 + col)}{row + 1}.",
+                "Hit!" if hit else "Miss!")
+        if hit:
+            self.last_hit = (row, col)
+            self.hunt_mode = True
+        else:
+            self.hunt_mode = False

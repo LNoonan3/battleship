@@ -233,3 +233,17 @@ class Computer(Player):
                         if 0 <= r < grid.size and 0 <=c < grid.size
                         and grid.grid[r][c] not in ['X', 'O']]
         return valid_targets
+
+def setup_ships(grid):
+    """
+    Places ships on the grid .
+    """
+    ships = [
+        ship("Carrier", 5),
+        ship("Battleship", 4),
+        ship("Cruiser", 3),
+        ship("Submarine", 3),
+        ship("Destroyer", 2)
+    ]
+    for ship in ships:
+        grid.place_ship(ship)

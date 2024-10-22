@@ -221,3 +221,15 @@ class Computer(Player):
             self.hunt_mode = True
         else:
             self.hunt_mode = False
+
+    def get_adjacent_cells(self, hit_coords, grid):
+        """
+        Returns valid adjacent cells around a hit for targeting.
+        """
+        row, col = hit_coords
+        potential_targets = [(row - 1, col), (row + 1, col), (row, col - 1),
+                                (row, col + 1)]
+        valid_targets = [(r, c) for r, c in potential_targets
+                        if 0 <= r < grid.size and 0 <=c < grid.size
+                        and grid.grid[r][c] not in ['X', 'O']]
+        return valid_targets

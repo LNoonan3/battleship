@@ -248,20 +248,19 @@ def setup_ships(grid):
         grid.place_ship(ship)
 
 def choose_game_options():
-    """
-    Prompts the player to choose game options like grid size and difficulty.
-    """
+    """Prompts the player to choose game options like grid size and difficulty."""
+    # Input validation for grid size
     while True:
         try:
-            grid_size- int(input("Choose grid size (8, 10, 12): "))
+            grid_size = int(input("Choose grid size (8, 10, 12): "))
             if grid_size not in [8, 10, 12]:
                 raise ValueError(
-                    "Invalid grid size. Please choose 8, 10, or 12."
-                    )
+                    "Invalid grid size. Please choose 8, 10, or 12.")
             break
-        except ValueError as e: 
+        except ValueError as e:
             print(e)
 
+    # Input validation for difficulty level
     while True:
         difficulty = input("Choose difficulty (easy, medium, hard): ").lower()
         if difficulty in ['easy', 'medium', 'hard']:
@@ -272,3 +271,51 @@ def choose_game_options():
             )
 
     return grid_size, difficulty
+
+
+def play_game():
+    """Main function to play the game."""
+    while True:
+        print("Welcome to Battleship!")
+        print("Game Rules:")
+        print("1. Take turns firing at the opponent's grid.")
+        print("2. Try to sink all of your opponent's ships.")
+        print("3. The first player to sink all enemy ships wins.")
+
+        grid_size, difficulty = choose_game_options()
+
+        # Player setup
+        player = Player("Player", grid_size)
+        setup_ships(player.grid)
+
+        # Computer setup
+        computer = Computer("Computer", grid_size, difficulty)
+        setup_ships(computer.grid)
+
+        game_over = False
+        while not game_over:
+            # Player's turn
+            print("\nYour Grid:")
+            player.grid.display(show_ships=True)  # Show player's ships
+            print("\nComputer's Grid:")
+            computer.grid.display()  # Hide computer's ships
+            player.take_turn(computer.grid)
+            if computer.grid.all_ships_sunk():
+                print("Congratulations! You sunk all the computer's ships!")
+                game_over = True
+                continue
+
+            # Computer's turn
+            computer.take_turn(player.grid)
+            if player.grid.all_ships_sunk():
+                print("The computer has sunk all your ships. You lose.")
+                game_over = True
+
+        play_again = input("\nWould you like to play again? (y/n): ").lower()
+        if play_again != 'y':
+            print("Thanks for playing Battleship! Goodbye!")
+            break
+
+
+if __name__ == "__main__":
+    play_game()

@@ -1,4 +1,5 @@
 import random
+import sys
 
 class Ship:
     """
@@ -49,7 +50,7 @@ class Grid:
                     row_display.append('~' if cell == 'S' else cell) #Hides ships as '~'
             
             #Adjust row numbers to aligin with single/double digits
-            print(f"{i+1<2} " + " ".join(row_display))
+            print(f"{i+1:<2} " + " ".join(row_display))
 
     def place_ship(self, ship):
         """
@@ -115,8 +116,8 @@ class Player:
         valid_input = False
         while not valid_input:
             try:
-                target = input(
-                    f"{self.name}, enter your target (e.g., A5: )").upper()
+                target = input(f"{self.name}, enter your target (e.g., A5: )").upper()
+                check_for_exit(target)
                 col = ord(target[0]) - 65 #convert letter to column index
                 row = int(target[1:]) - 1 #convert number to row index
                 if row < 0 or col < 0 or row >= opponent_grid.size or col >= opponent_grid.size:
@@ -134,7 +135,7 @@ class Computer(Player):
     """
     a class representing the computer player with enhanced AI.
     """
-    def __init__(self, name, grid_size, dificulty='easy'):
+    def __init__(self, name, grid_size, difficulty='easy'):
         super().__init__(name, grid_size)
         self.difficulty = difficulty
         self.last_hit = None
@@ -234,18 +235,25 @@ class Computer(Player):
         return valid_targets
 
 def setup_ships(grid):
-    """
-    Places ships on the grid .
-    """
+    """Places ships on the grid."""
     ships = [
-        ship("Carrier", 5),
-        ship("Battleship", 4),
-        ship("Cruiser", 3),
-        ship("Submarine", 3),
-        ship("Destroyer", 2)
+        Ship("Carrier", 5),
+        Ship("Battleship", 4),
+        Ship("Cruiser", 3),
+        Ship("Submarine", 3),
+        Ship("Destroyer", 2)
     ]
     for ship in ships:
         grid.place_ship(ship)
+
+def check_for_exit(input_string):
+    """
+    check if the player's input is the word 'exit'.
+    if so, exits the game.
+    """
+    if input_string.lower() == 'exit':
+        print("You have exited the game. Goodbye!")
+        sys.exit
 
 def choose_game_options():
     """Prompts the player to choose game options like grid size and difficulty."""
@@ -253,6 +261,8 @@ def choose_game_options():
     while True:
         try:
             grid_size = int(input("Choose grid size (8, 10, 12): "))
+            check_for_exit(grid_size)
+            grid_size = int(grid_size)
             if grid_size not in [8, 10, 12]:
                 raise ValueError(
                     "Invalid grid size. Please choose 8, 10, or 12.")
@@ -263,6 +273,7 @@ def choose_game_options():
     # Input validation for difficulty level
     while True:
         difficulty = input("Choose difficulty (easy, medium, hard): ").lower()
+        check_for_exit(difficulty)
         if difficulty in ['easy', 'medium', 'hard']:
             break
         else:
@@ -277,6 +288,7 @@ def play_game():
     """Main function to play the game."""
     while True:
         print("Welcome to Battleship!")
+        print("Type 'exit' at any point to quit the game.")
         print("Game Rules:")
         print("1. Take turns firing at the opponent's grid.")
         print("2. Try to sink all of your opponent's ships.")
@@ -312,6 +324,7 @@ def play_game():
                 game_over = True
 
         play_again = input("\nWould you like to play again? (y/n): ").lower()
+        check_for_exit(play_again)
         if play_again != 'y':
             print("Thanks for playing Battleship! Goodbye!")
             break

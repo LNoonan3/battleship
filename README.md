@@ -126,7 +126,7 @@ The game was deployed using the following steps:
 ## Credits
 - **Python Docs:** For Python language references and syntax.
 - **Battleship Strategy Guides:** For game logic inspirations.
+- **README.md example:** I used this [example](https://github.com/keelback-code/the-rhubarb-witch) project to help with the README.md
 
 ## Acknowledgements
 Special thanks to my mentor for guidance and support throughout the project development. Many thanks to friends and family who provided feedback and helped with testing.
-I used this [example](https://github.com/keelback-code/the-rhubarb-witch) project to help with the README.md

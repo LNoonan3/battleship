@@ -126,7 +126,6 @@ The game was deployed using the following steps:
 ## Credits
 - **Python Docs:** For Python language references and syntax.
 - **Battleship Strategy Guides:** For game logic inspirations.
-- **TAAG:** For ASCII art used in victory/defeat messages.
 
 ## Acknowledgements
 Special thanks to my mentor for guidance and support throughout the project development. Many thanks to friends and family who provided feedback and helped with testing.

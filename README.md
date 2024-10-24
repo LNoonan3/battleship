@@ -4,7 +4,7 @@
 - [Purpose](#purpose)
 - [User Stories](#user-stories)
 - [Design and UX](#design-and-ux)
-- [Story Map and Flow Chart](#story-map-and-flow-chart)
+- [Notepad planning](#notepad-planning)
 - [Features](#features)
 - [Technologies](#technologies)
 - [Testing](#testing)

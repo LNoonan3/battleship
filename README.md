@@ -12,7 +12,7 @@
   - [Browser Compatibility](#browser-compatibility)
   - [Performance Testing](#performance-testing)
   - [Manual Testing](#manual-testing)
-  - [User Stories Testing](#user-stories-testing)
+  - [User Testing](#user-testing)
 - [Debugging and Known Bugs](#debugging-and-known-bugs)
 - [Deployment](#deployment)
 - [Credits](#credits)

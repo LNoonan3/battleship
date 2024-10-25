@@ -55,19 +55,19 @@ The game follows a simple flow:
 ### Existing Features:
 - **Grid Display:** Shows the game grid and updates it after each move.
   - *Example: Displays player’s and computer’s grids with current status.*
-  ![grid](/assets/images/grid.JPG)
+  - ![grid](/assets/images/grid.JPG)
   
 - **Ship Placement:** Players ships are placed randomly.
   - *Example: Players see their ships and guess coordinates for the opponent's ships.*
-  ![player-ship](/assets/images/player-ship.JPG)
+  - ![player-ship](/assets/images/player-ship.JPG)
   
 - **Hit and Miss Feedback:** The game provides real-time feedback on attacks.
   - *Example: “Hit!” or “Miss!” messages after each attack.*
-  ![feedback](/assets/images/hit-miss.JPG)
+  - ![feedback](/assets/images/hit-miss.JPG)
   
 - **Victory Conditions:** The game announces a winner once all ships of one player are destroyed.
   - *Example: Displaying a message of congratulations or defeat.*
-  ![victory-conditions](/assets/images/victory-condition.JPG)
+  - ![victory-conditions](/assets/images/victory-condition.JPG)
 
 - **Input Validation:** The game handles invalid inputs (e.g., out-of-bound coordinates) gracefully.
     - ![input-validation](/assets/images/input-validation.JPG)
